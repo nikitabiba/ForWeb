@@ -1,0 +1,55 @@
+:root {
+  --main_color1: black;
+  --main_color2: white;
+  --color1: #303030;
+  --color2: #787878;
+}
+
+[data-theme='beautiful'] {
+  --main_color1: red;
+  --main_color2: white;
+  --color1: rgb(112, 0, 0);
+  --color2: rgb(197, 75, 75);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  background-color: var(--main_color1);
+  color: var(--main_color2);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  justify-content: right;
+  padding: 20px 0px 20px 0px;
+}
+
+.nav_links {
+  color: var(--main_color2);
+  text-decoration: none;
+  padding: 5px;
+  border: 1px solid var(--main_color2);
+  margin-right: 10px;
+}
+
+.nav_links:hover {
+  color: var(--main_color1);
+  border: 1px solid var(--main_color1);
+  background-color: var(--main_color2);
+}
+
+.nav_links.router-link-active {
+  color: var(--main_color1);
+  border: 1px solid var(--main_color1);
+  background-color: var(--main_color2);
+  font-weight: bold;
+}
