@@ -6,6 +6,8 @@ import type {
   FilterParams,
   LaureateDetails
 } from '@/types/nobel'
+import { NobelApiResponseCodec, LaureateApiResponseCodec } from '@/codecs/nobel.codec'
+import { decodeOrThrow } from '@/utils/decode'
 
 class NobelService extends HttpService {
   constructor() {
@@ -32,7 +34,8 @@ class NobelService extends HttpService {
     }
 
     const url = `/nobelPrizes${queryParams.toString() ? '?' + queryParams.toString() : ''}`
-    return this.get<NobelApiResponse>(url)
+    const rawData = await this.get<unknown>(url)
+    return decodeOrThrow(NobelApiResponseCodec, rawData)
   }
 
   async getLaureates(params?: PaginationParams & FilterParams): Promise<LaureateApiResponse> {
@@ -52,11 +55,13 @@ class NobelService extends HttpService {
     }
 
     const url = `/laureates${queryParams.toString() ? '?' + queryParams.toString() : ''}`
-    return this.get<LaureateApiResponse>(url)
+    const rawData = await this.get<unknown>(url)
+    return decodeOrThrow(LaureateApiResponseCodec, rawData)
   }
 
   async getLaureateById(id: string): Promise<LaureateDetails> {
-    const response = await this.get<LaureateApiResponse>(`/laureate/${id}`)
+    const rawData = await this.get<unknown>(`/laureate/${id}`)
+    const response = decodeOrThrow(LaureateApiResponseCodec, rawData)
     return response.laureates[0]
   }
 }
