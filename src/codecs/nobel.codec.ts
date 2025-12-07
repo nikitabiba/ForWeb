@@ -95,7 +95,7 @@ export const NobelLaureateCodec = t.intersection([
     id: t.string,
     portion: t.string,
     sortOrder: t.string,
-    links: LinkCodec,
+    links: t.array(LinkCodec),
   }),
   t.partial({
     knownName: LocalizedTextCodec,
@@ -121,7 +121,7 @@ export const NobelPrizeCodec = t.intersection([
     category: CategoryCodec,
     prizeAmount: t.number,
     prizeAmountAdjusted: t.number,
-    links: LinkCodec,
+    links: t.array(LinkCodec),
   }),
   t.partial({
     categoryFullName: CategoryCodec,
